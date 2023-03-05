@@ -1,0 +1,113 @@
+<%- include('../edges/header.ejs') %>
+
+<h1 style="text-align: center">Actualizar Auto</h1>
+
+<% const existeMensaje= typeof datos.mensaje !== 'undefined' %>
+<% if (existeMensaje) {%>
+    <div class="alert alert-success" role="alert">
+        <%= datos.mensaje%>
+    </div>
+<%} %>
+
+<div>
+    <form action="/autos/formActualizarAuto/<%=datos.auto.id%>" method="post">
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marca</label>
+            <input placeholder="Ej: Toyota"
+                   type="text"
+                   name="marca"
+                   class="form-control"
+                   id="marca"
+                   value="<%= datos.auto.marca%>"
+                   aria-describedby="ayudaMarca">
+            <div id="ayudaMarca" class="form-test">
+                Ingrese la marca del auto
+            </div>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input placeholder="Ej: Corolla"
+                   type="text"
+                   name="nombre"
+                   class="form-control"
+                   id="nombre"
+                   value="<%= datos.auto.nombre%>"
+                   aria-describedby="ayudaNombre">
+            <div id="ayudaNombre" class="form-test">
+                Ingrese el nombre del auto
+            </div>
+        </div>
+
+        <div>
+            <label for="conPlaca">Con Placa</label>
+            <% if(datos.auto.conPlaca==true){  %>
+                <input type="checkbox"
+                       name="conPlaca"
+                       id="conPlaca"
+                       checked="checked"
+                       aria-describedby="ayudaConPlaca">
+            <% } else {%>
+                <input type="checkbox"
+                       name="conPlaca"
+                       id="conPlaca"
+                       aria-describedby="ayudaConPlaca">
+            <% } %>
+            <div id="ayudaConPlaca" class="form-test">
+                Selecciona si tiene ya la placa
+            </div>
+        </div>
+
+        <br>
+
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input placeholder="Ej: 27000,00"
+                   type="text"
+                   name="precio"
+                   class="form-control"
+                   id="precio"
+                   value="<%= datos.auto.precio%>"
+                   aria-describedby="ayudaPrecio">
+            <div id="ayudaPrecio" class="form-test">
+                Ingrese el precio inicial del auto
+            </div>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="cantidadStock" class="form-label">Cantidad en Stock</label>
+            <input placeholder="Ej: 5"
+                   type="number"
+                   name="cantidadStock"
+                   class="form-control"
+                   id="cantidadStock"
+                   value="<%= datos.auto.cantidadStock%>"
+                   aria-describedby="ayudaStock">
+            <div id="ayudaStock" class="form-test">
+                Ingrese la cantidad de autos en Stock
+            </div>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="fechaIngreso" class="form-label">Fecha de Ingreso</label>
+            <input type="date"
+                   name="fechaIngreso"
+                   class="form-control"
+                   id="fechaIngreso"
+                   value="<%= datos.auto.fechaIngreso%>"
+                   aria-describedby="ayudaFecha">
+            <div id="ayudaFecha" class="form-test">
+                Seleccione la fecha de ingso del auto
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Actualizar</button>
+
+    </form>
+
+</div>
+
+<%- include('../edges/footer.ejs') %>

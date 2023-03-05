@@ -1,0 +1,85 @@
+<%- include('../edges/header.ejs') %>
+
+<div class='container'>
+    <h1 style="text-align: center">Lista de Autos</h1>
+    <br><br>
+
+    <% const existeMensaje= typeof datos.mensaje !== 'undefined' %>
+    <% if (existeMensaje) {%>
+        <div class="alert alert-success" role="alert">
+            <%= datos.mensaje%>
+        </div>
+    <% }%>
+
+    <br>
+
+    <form action="/autos/lista" method="get">
+        <div class="mb-3">
+            <label for="busqueda" class="form-label">Busqueda</label>
+            <input placeholder="Ej: Wilman"
+                   type="text"
+                   name="busqueda"
+                   class="form-control"
+                   id="busqueda"
+                   aria-describedby="ayudaBusqueda">
+            <div id="ayudaBusqueda" class="form-test">
+                Buscar por marca o nombre
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+
+    </form>
+
+    <br>
+    <div>
+        <a href="/autos/crear">
+            <button class="btn btn-success float-right">Crear Nuevo Auto</button>
+        </a>
+    </div>
+
+    <br>
+
+    <h2 style="text-align: center">Tabla</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Tiene Placa</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Fecha de Ingreso</th>
+            <th scope="col">Actualizar</th>
+            <th scope="col">Eliminar</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% datos.autos.forEach( (objeto) => {%>
+            <tr>
+                <td><%= objeto.id %></td>
+                <td><%= objeto.marca %></td>
+                <td><%= objeto.nombre %></td>
+                <td><%= objeto.conPlaca %></td>
+                <td><%= objeto.precio %></td>
+                <td><%= objeto.cantidadStock %></td>
+                <td><%= objeto.fechaIngreso.toDateString() %></td>
+                <td>
+                    <form action="/autos/actualizar/<%=objeto.id%>" method="post">
+                        <button class="btn btn-danger">Actualizar</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/autos/eliminar/<%=objeto.id%>" method="post">
+                        <button class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        <% } ) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../edges/footer.ejs') %>
